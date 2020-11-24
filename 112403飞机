@@ -1,0 +1,73 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class APP {
+
+    JPanel myPanel=new JPanel();
+    JLabel label_bg=new JLabel();
+    JLabel label_air=new JLabel();
+    JTextArea textArea_a=new JTextArea();
+    JTextArea textArea_b=new JTextArea();
+    JFrame frame = new JFrame("窗体123456");
+    int x=100,y=100;
+
+    public APP(){
+//        textArea_a.setText("点击上↑键输出文字");
+//        textArea_a.setBounds(100,100,256,128);
+//        textArea_a.setBackground(Color.orange);
+//        myPanel.add(textArea_a);
+//        textArea_b.setBounds(100,300,256,128);
+//        textArea_b.setBackground(Color.yellow);
+//        myPanel.add(textArea_b);
+        label_air.setBounds(x,y,200,200);
+        label_air.setIcon(new ImageIcon("image/plane1.png"));
+        myPanel.add(label_air);
+        label_bg.setBounds(0,0,512,720);
+        label_bg.setIcon(new ImageIcon("image/background.png"));
+        myPanel.add(label_bg);
+
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if(e.getKeyCode()==KeyEvent.VK_DOWN){
+                    y=y+20;
+                    label_air.setBounds(x,y,200,200);
+                }
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+                    y=y-20;
+                    label_air.setBounds(x,y,200,200);
+                }
+                if(e.getKeyCode()==KeyEvent.VK_LEFT){
+                    x=x-20;
+                    label_air.setBounds(x,y,200,200);
+                }
+                if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+                    x=x+20;
+                    label_air.setBounds(x,y,200,200);
+                }
+
+
+
+            }
+        });
+    }
+    void go(){
+//        JFrame frame = new JFrame("窗体123456");
+        myPanel.setLayout(null);
+        frame.setContentPane(myPanel);
+//        java.net.URL bg=APP.class.getResource("image/background.png");
+//        bg_img.setIcon(new ImageIcon("image/background.png"));
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,512,720);
+        //frame.pack();
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new APP().go();
+    }
+
+}
