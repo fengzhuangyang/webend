@@ -1,0 +1,55 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class APP {
+    JPanel myPanel=new JPanel();
+    JLabel label_text=new JLabel();
+    JTextArea textArea_a=new JTextArea();
+    JTextArea textArea_b=new JTextArea();
+
+
+
+    public APP(){
+        textArea_a.setText("点击上↑键输出文字");
+        textArea_a.setBounds(100,100,256,128);
+        textArea_a.setBackground(Color.orange);
+        myPanel.add(textArea_a);
+        textArea_b.setBounds(100,300,256,128);
+        textArea_b.setBackground(Color.yellow);
+        myPanel.add(textArea_b);
+
+        textArea_a.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    textArea_b.append("欢迎加入上海名媛群！\n");
+                }
+                if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+                    textArea_b.append("狗名媛给爷爬\n");
+                }
+                if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    textArea_b.append("集美们，来拼单啦！\n");
+                }
+                if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+                    textArea_b.setText("");
+                }
+            }
+        });
+    }
+    void go(){
+        JFrame frame = new JFrame("窗体123456");
+        myPanel.setLayout(null);
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,512,720);
+        //frame.pack();
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new APP().go();
+    }
+
+}
