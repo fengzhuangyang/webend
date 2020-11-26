@@ -1,0 +1,66 @@
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class App {
+    JPanel myPanel=new JPanel();
+JLabel jLabel_bg=new JLabel();
+    JLabel jLabel_score=new JLabel();
+    int score,score1,score2,score3,score4;
+    //构造方法
+    public App() {
+        myPanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                score1=1;
+
+
+                score=score1+score2+score3+score4;
+                if (e.getX()<150 && e.getY()<400){
+jLabel_score.setText("分数：" + String.valueOf(score));
+
+
+
+                }
+                if (e.getX()<400 && e.getY()<420){
+                    score2=1;
+                    jLabel_score.setText("分数：" + String.valueOf(score));
+                }
+                if (e.getX()<300 && e.getY()<700){
+                       score3=1;
+                        jLabel_score.setText("分数：" + String.valueOf(score));
+                    }
+
+                
+
+
+            }
+        });
+    }
+    //显示窗体方法
+    void go(){
+        JFrame frame = new JFrame("TestGUI");
+        myPanel.setLayout(null);
+
+        java.net.URL imgURL = App.class.getResource("img/bg.png");
+        jLabel_bg.setIcon(new ImageIcon(imgURL));
+        jLabel_bg.setBounds(0,0,1000,800);
+        myPanel.add(jLabel_bg);
+
+        jLabel_score.setText("分数：0");
+        jLabel_score.setBounds(0,0,200,50);
+        myPanel.add(jLabel_score);
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,1000,800);
+
+        //frame.pack();
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new App().go();
+    }
+}
