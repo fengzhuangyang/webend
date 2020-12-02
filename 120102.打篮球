@@ -1,0 +1,117 @@
+import javax.swing.*;
+import java.applet.Applet;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.Random;
+
+public class App {
+    JPanel myPanel=new JPanel();
+    JLabel a=new JLabel();
+    JLabel b=new JLabel();
+    JLabel c=new JLabel();
+    JLabel d=new JLabel();
+    JLabel fen=new JLabel();
+    Random r=new Random();
+
+    JFrame frame = new JFrame("窗体123456");
+    int x=0,y=0,width=64,height=64;
+    int row=0,col=0;
+    int i=0;
+    //构造方法
+    public App() {
+        myPanel.setLayout(null);
+
+//        d.setBounds(row,col,100,100);
+//        d.setText("进球");
+//        myPanel.add(d);
+
+        java.net.URL imgURL1 = App.class.getResource("img/ball.gif");
+        a.setIcon(new ImageIcon(imgURL1));
+        a.setBounds(x,y,width,height);
+        myPanel.add(a);
+
+
+        fen.setBounds(50,50,100,100);
+        fen.setText("当前分数：0");
+        myPanel.add(fen);
+
+        row=r.nextInt(16)*64;
+        col=r.nextInt(12)*64;
+        java.net.URL imgURL2 = App.class.getResource("img/basket.jpg");
+        c.setIcon(new ImageIcon(imgURL2));
+        c.setBounds(row,col,64,64);
+        myPanel.add(c);
+
+        java.net.URL imgURL3 = App.class.getResource("img/768.png");
+        b.setIcon(new ImageIcon(imgURL3));
+        b.setBounds(x,y,1024,768);
+        myPanel.add(b);
+
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                /*判断是否按下回车*/
+                if(e.getKeyCode()==KeyEvent.VK_ENTER){
+                    /*判断图片是否重叠*/
+                    if(y==col&&x==row){
+                        System.out.printf("进球");
+
+
+                        row=r.nextInt(16)*64;
+                        col=r.nextInt(12)*64;
+                        d.setBounds(row,col,100,100);
+                        d.setText("进000000000000球");
+                        myPanel.add(d);
+
+
+                    }
+                }
+                if(e.getKeyCode()==KeyEvent.VK_DOWN){
+                    //判断是否到边界
+                    if(y<=640){
+                        y=y+height;
+                        a.setBounds(x,y,width,height);
+                    }
+                }
+                if(e.getKeyCode()==KeyEvent.VK_UP){
+                    //判断是否到边界
+                    if(y>0){
+                        y=y-height;
+                        a.setBounds(x,y,width,height);
+                    }
+
+                }
+                if(e.getKeyCode()==KeyEvent.VK_LEFT){
+                    //判断是否到边界
+                    if(x>0){
+                        x=x-width;
+                        a.setBounds(x,y,width,height);
+                    }
+                }
+                if(e.getKeyCode()==KeyEvent.VK_RIGHT){
+                    //判断是否到边界
+                    if(x<=896){
+                        x=x+width;
+                        a.setBounds(x,y,width,height);
+                    }
+                }
+            }
+        });
+
+    }
+    //显示窗体方法
+    void go(){
+
+        myPanel.setLayout(null);
+        frame.setContentPane(myPanel);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setBounds(100,100,1024,800);
+        frame.setVisible(true);
+    }
+    public static void main(String[] args) {
+        new App().go();
+    }
+}
+
