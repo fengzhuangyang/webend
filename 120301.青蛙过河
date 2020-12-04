@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -10,7 +11,9 @@ public class App {
     JLabel label_frog1=new JLabel();
     JLabel label_frog2=new JLabel();
     JTextArea textArea_UserInput=new JTextArea();
+    JLabel textArea_end=new JLabel();
     int  score=0,score1=0,score2=0,score3=0;
+    int x1=270,x2=200,x3=550,y1=256,y2=100,y3=30;
     //构造方法
     public App() {
         myPanel.addKeyListener(new KeyAdapter() {
@@ -18,43 +21,68 @@ public class App {
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e);
                 textArea_UserInput.append(String.valueOf(e.getKeyChar()));
+
+
+                if (e.getKeyCode()==KeyEvent.VK_ENTER){
+                    textArea_UserInput.setText("");
+                }
+
                 if(label_frog.getX()!=550 ) {
                     if (textArea_UserInput.getText().equals("hello")) {
                         label_frog.setBounds(270, 256, 128, 128);
+                        score1++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分"+score);
+
                         textArea_UserInput.setText("");
                     }
                 }
                 if(label_frog.getX()==270){
-                if (textArea_UserInput.getText().equals("world")){
-                    label_frog.setBounds(200,100,128,128);
-                    textArea_UserInput.setText("");
-                }
-                }
-
-                if(label_frog.getX()==200){
-                if (textArea_UserInput.getText().equals("hi")){
-                    label_frog.setBounds(550,30,128,128);
-                    textArea_UserInput.setText("");
-                }
-                }
-                if(label_frog1.getX()!=640 ) {
-                if(label_frog.getX()==550 ) {
-                    if (textArea_UserInput.getText().equals("hello")) {
-                        label_frog1.setBounds(270, 256, 128, 128);
+                    if (textArea_UserInput.getText().equals("world")){
+                        label_frog.setBounds(200,100,128,128);
+                        score1++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分：0"+score);
                         textArea_UserInput.setText("");
                     }
                 }
+
+                if(label_frog.getX()==200){
+                    if (textArea_UserInput.getText().equals("hi")){
+                        label_frog.setBounds(550,30,128,128);
+                        score1++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分：0"+score);
+                        textArea_UserInput.setText("");
+                    }
                 }
-                    if (label_frog1.getX() == 270) {
-                        if (textArea_UserInput.getText().equals("world")) {
-                            label_frog1.setBounds(200, 100, 128, 128);
+                if(label_frog1.getX()!=640 ) {
+                    if(label_frog.getX()==550 ) {
+                        if (textArea_UserInput.getText().equals("hello")) {
+                            label_frog1.setBounds(270, 256, 128, 128);
+                            score2++;
+                            score=score1+score2+score3;
+                            label_score.setText("得分：0"+score);
                             textArea_UserInput.setText("");
                         }
                     }
+                }
+                if (label_frog1.getX() == 270) {
+                    if (textArea_UserInput.getText().equals("world")) {
+                        label_frog1.setBounds(200, 100, 128, 128);
+                        score2++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分：0"+score);
+                        textArea_UserInput.setText("");
+                    }
+                }
 
                 if(label_frog1.getX()==200){
                     if (textArea_UserInput.getText().equals("hi")){
                         label_frog1.setBounds(640,30,128,128);
+                        score2++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分：0"+score);
                         textArea_UserInput.setText("");
                     }
                 }
@@ -63,6 +91,9 @@ public class App {
                     if(label_frog1.getX()==640 ) {
                         if (textArea_UserInput.getText().equals("hello")) {
                             label_frog2.setBounds(270, 256, 128, 128);
+                            score3++;
+                            score=score1+score2+score3;
+                            label_score.setText("得分：0"+score);
                             textArea_UserInput.setText("");
 
                         }
@@ -71,6 +102,9 @@ public class App {
                 if (label_frog2.getX() == 270) {
                     if (textArea_UserInput.getText().equals("world")) {
                         label_frog2.setBounds(200, 100, 128, 128);
+                        score3++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分：0"+score);
                         textArea_UserInput.setText("");
                     }
                 }
@@ -78,10 +112,17 @@ public class App {
                 if(label_frog2.getX()==200){
                     if (textArea_UserInput.getText().equals("hi")){
                         label_frog2.setBounds(730,30,128,128);
+                        score3++;
+                        score=score1+score2+score3;
+                        label_score.setText("得分：0"+score);
                         textArea_UserInput.setText("");
                     }
                 }
+                if (score==9){
+                    textArea_end.setText("恭喜通关");
+                    textArea_end.setBounds(400,400,200,200);
 
+                }
             }
         });
     }
@@ -107,6 +148,7 @@ public class App {
 
         label_score.setText("得分：0");
         label_score.setBounds(400,0,200,50);
+        myPanel.add(textArea_end);
         myPanel.add(label_score);
         myPanel.add(label_frog);
         myPanel.add(label_frog1);
